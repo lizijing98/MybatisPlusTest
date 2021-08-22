@@ -1,0 +1,74 @@
+DROP TABLE IF EXISTS `tb_user`;
+CREATE TABLE `tb_user`
+(
+    id          INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '用户 ID',
+    username    VARCHAR(255) NOT NULL UNIQUE COMMENT '用户名',
+    password    VARCHAR(255) NOT NULL COMMENT '密码',
+    phone       VARCHAR(11)  DEFAULT NULL COMMENT '手机号码',
+    email       VARCHAR(255) DEFAULT NULL COMMENT '邮箱',
+    description VARCHAR(255) DEFAULT NULL COMMENT '备注',
+    create_time TIMESTAMP    DEFAULT NOW() COMMENT '创建时间',
+    update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间'
+)
+    ENGINE InnoDB
+    DEFAULT CHARSET = utf8mb4
+    AUTO_INCREMENT = 10
+    comment ='用户表';
+
+DROP TABLE IF EXISTS `tb_role`;
+CREATE TABLE `tb_role`
+(
+    id          INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '角色 ID',
+    name        VARCHAR(255) NOT NULL COMMENT '角色名称',
+    name_en     VARCHAR(255) NOT NULL COMMENT '英文名称',
+    description VARCHAR(255) DEFAULT NULL COMMENT '备注',
+    create_time TIMESTAMP    DEFAULT NOW() COMMENT '创建时间',
+    update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间'
+)
+    ENGINE InnoDB
+    DEFAULT CHARSET = utf8mb4
+    AUTO_INCREMENT = 10
+    comment ='角色表';
+
+DROP TABLE IF EXISTS `tb_permission`;
+CREATE TABLE `tb_permission`
+(
+    id          INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '权限 ID',
+    name        VARCHAR(255) NOT NULL COMMENT '角色名称',
+    name_en     VARCHAR(255) NOT NULL COMMENT '英文名称',
+    description VARCHAR(255) DEFAULT NULL COMMENT '备注',
+    create_time TIMESTAMP    DEFAULT NOW() COMMENT '创建时间',
+    update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间'
+)
+    ENGINE InnoDB
+    DEFAULT CHARSET = utf8mb4
+    AUTO_INCREMENT = 10
+    comment ='权限表';
+
+DROP TABLE IF EXISTS `tb_user_role`;
+CREATE TABLE `tb_user_role`
+(
+    id          INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id     INTEGER NOT NULL COMMENT '用户 ID',
+    role_id     INTEGER NOT NULL COMMENT '角色 ID',
+    create_time TIMESTAMP DEFAULT NOW() COMMENT '创建时间',
+    update_time TIMESTAMP DEFAULT NULL COMMENT '更新时间'
+)
+    ENGINE InnoDB
+    DEFAULT CHARSET = utf8mb4
+    AUTO_INCREMENT = 10
+    comment ='用户角色表';
+
+DROP TABLE IF EXISTS `tb_role_permission`;
+CREATE TABLE `tb_role_permission`
+(
+    id            INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    role_id       INTEGER NOT NULL COMMENT '角色 ID',
+    permission_id INTEGER NOT NULL COMMENT '权限 ID',
+    create_time   TIMESTAMP DEFAULT NOW() COMMENT '创建时间',
+    update_time   TIMESTAMP DEFAULT NULL COMMENT '更新时间'
+)
+    ENGINE InnoDB
+    DEFAULT CHARSET = utf8mb4
+    AUTO_INCREMENT = 10
+    comment ='角色权限表';
