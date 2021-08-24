@@ -11,4 +11,9 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 logging:
-  config: src/main/resources/logback.xml
+  file:
+    path: logs
+  config: classpath:logback-spring.xml
+#  pattern:
+#    console: %boldRed(%d{yyyy-MM-dd HH:mm:ss}) | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %boldCyan(%msg%n)
+#    file: %d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n

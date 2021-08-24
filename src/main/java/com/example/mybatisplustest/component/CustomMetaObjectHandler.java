@@ -1,12 +1,16 @@
 package com.example.mybatisplustest.component;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Slf4j
+@Component
 public class CustomMetaObjectHandler implements MetaObjectHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomMetaObjectHandler.class);
