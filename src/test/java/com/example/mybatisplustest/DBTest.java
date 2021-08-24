@@ -19,8 +19,8 @@ public class DBTest {
     @Test
     void testInsert() {
         TbUser user = new TbUser();
-        user.setUsername("testUser");
-        user.setPassword("testUser");
+        user.setUsername("testUser2");
+        user.setPassword("testUser2");
         user.setDescription("a test User record");
         int result = tbUserMapper.insert(user);
         LOGGER.info(user.toString());

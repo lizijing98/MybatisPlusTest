@@ -22,9 +22,14 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        logger.info("start insert filling...");
-        this.setFieldValByName("create_time", new Date(), metaObject);
-        this.setFieldValByName("update_time", new Date(), metaObject);
+        /*logger.info("start insert filling...");*/
+        log.info("start insert filling...");
+        try {
+            this.strictInsertFill(metaObject, "createTime", Date.class, new Date());
+            this.strictInsertFill(metaObject, "updateTime", Date.class, new Date());
+        }catch (Exception e){
+            log.error("自动注入失败: ",e);
+        }
     }
 
     /**
@@ -35,6 +40,10 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         logger.info("start update filling...");
-        this.setFieldValByName("update_time", new Date(), metaObject);
+        try {
+            this.strictUpdateFill(metaObject, "update_time", Date.class, new Date());
+        }catch (Exception e){
+            log.error("自动注入失败: ",e);
+        }
     }
 }
