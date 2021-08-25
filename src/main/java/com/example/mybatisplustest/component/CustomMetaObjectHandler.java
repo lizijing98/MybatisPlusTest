@@ -41,7 +41,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         logger.info("start update filling...");
         try {
-            this.strictUpdateFill(metaObject, "update_time", Date.class, new Date());
+            this.strictUpdateFill(metaObject, "updateTime", Date.class, new Date());
         }catch (Exception e){
             log.error("自动注入失败: ",e);
         }
