@@ -1,9 +1,6 @@
 package com.example.mybatisplustest.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -73,6 +70,13 @@ public class TbUser extends Model<TbUser> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
+
+    /**
+     * 0 代表未删除，1 代表已删除
+     */
+    @TableField(fill = FieldFill.INSERT)
+    @TableLogic(value = "0",delval = "1")
+    private int visibility;
 
 
     @Override

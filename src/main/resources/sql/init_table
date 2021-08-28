@@ -1,14 +1,15 @@
 DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user`
 (
-    id          INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '用户 ID',
-    username    VARCHAR(255) NOT NULL UNIQUE COMMENT '用户名',
-    password    VARCHAR(255) NOT NULL COMMENT '密码',
+    id          INTEGER                NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '用户 ID',
+    username    VARCHAR(255)           NOT NULL UNIQUE COMMENT '用户名',
+    password    VARCHAR(255)           NOT NULL COMMENT '密码',
     phone       VARCHAR(11)  DEFAULT NULL COMMENT '手机号码',
     email       VARCHAR(255) DEFAULT NULL COMMENT '邮箱',
     description VARCHAR(255) DEFAULT NULL COMMENT '备注',
     create_time TIMESTAMP    DEFAULT NOW() COMMENT '创建时间',
-    update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间'
+    update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间',
+    visibility  TINYINT      DEFAULT 0 NOT NULL COMMENT '0 代表未删除，1 代表已删除'
 )
     ENGINE InnoDB
     DEFAULT CHARSET = utf8mb4

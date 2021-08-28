@@ -21,6 +21,9 @@ public interface TbUserService extends IService<TbUser> {
     // delete by id
     Integer deleteUserById(Integer userId);
 
+    // delete by username
+    Integer deleteUserByUsername(String username);
+
     // update one user
     Integer updateOneUser(TbUser user);
 

@@ -7,7 +7,9 @@ import com.example.mybatisplustest.service.TbUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -33,6 +35,12 @@ public class TbUserImpl extends ServiceImpl<TbUserMapper, TbUser> implements TbU
         return userMapper.deleteById(userId);
     }
 
+    @Override
+    public Integer deleteUserByUsername(String username) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("username",username);
+        return userMapper.deleteByMap(map);
+    }
 
     @Override
     public Integer updateOneUser(TbUser user) {
@@ -41,7 +49,7 @@ public class TbUserImpl extends ServiceImpl<TbUserMapper, TbUser> implements TbU
 
     @Override
     public TbUser findUserByUsername(String username) {
-        return null;
+        return userMapper.selectByUsername(username);
     }
 
     @Override

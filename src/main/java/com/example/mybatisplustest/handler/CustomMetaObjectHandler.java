@@ -1,4 +1,4 @@
-package com.example.mybatisplustest.component;
+package com.example.mybatisplustest.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +27,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
         try {
             this.strictInsertFill(metaObject, "createTime", Date.class, new Date());
             this.strictInsertFill(metaObject, "updateTime", Date.class, new Date());
+            this.strictInsertFill(metaObject,"visibility",Integer.class,0);
         }catch (Exception e){
             log.error("自动注入失败: ",e);
         }
