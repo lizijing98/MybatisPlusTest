@@ -25,6 +25,10 @@
 
     <!-- 文件输出 -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--添加范围过滤-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
             <fileNamePattern>${LOG_HOME}/logback_%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -50,7 +54,7 @@
     </appender>
 
     <springProfile name="dev">
-        <logger name="com.example.mybatisplustest" level="warn" additivity="true">
+        <logger name="com.example.mybatisplustest" level="info" additivity="true">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
         </logger>
