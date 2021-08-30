@@ -1,3 +1,31 @@
+# Slf4j 和 logback 配置及使用
+
+## 一、引入 Maven 依赖
+
+在项目的 pom.xml 中添加 Slf4j 相关的依赖
+
+```xml
+<!--velocity-->
+<dependency>         	<groupId>org.apache.velocity</groupId>
+	<artifactId>velocity-engine-core</artifactId>
+	<version>2.3</version>
+</dependency>
+<!--slf4j-->
+<dependency>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-api</artifactId>
+<version>1.7.32</version>
+</dependency>
+    <dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-log4j12</artifactId>
+    <version>1.7.32</version>
+</dependency>            
+```
+
+## 二、配置日志配置 logback.xml
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!--scan：当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
     scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒当scan为true时，此属性生效。默认的时间间隔为1分钟。
@@ -61,3 +89,63 @@
     </springProfile>
     <!-- 日志输出级别 -->
 </configuration>
+```
+
+想要自定义日志输出格式只需要在 logback.xml 中更改相应配置即可，具体配置说明不在详述，可在网上查阅
+
+## 三、测试
+
+想要在某个类中输出日志有两种方法
+
+1. 在类上使用注解
+
+```java
+@Slf4j
+public class className(){...}
+```
+
+2. 在类中实例化一个日志输出对象
+
+```java
+private final static Logger LOG = LoggerFactory.getLogger(className.class);
+```
+
+这两种方法都可以实现日志的输出
+
+以第一种方法为例，具体使用方法见下：
+
+```java
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+/**
+ * @ClassName LogTest
+ * @Description 日志测试类
+ * @Author LiZijing
+ * @Date 2021/8/29
+ */
+@SpringBootTest
+@Slf4j
+public class LogTest {
+    @Test
+    public void logTest(){
+        log.info("this is a info log");
+        log.warn("this is a warn log");
+        log.error("this is a error log");
+        log.debug("this is a debug log");
+        log.trace("this is a trace log");
+    }
+}
+```
+
+输出结果如下：
+
+> 控制台输出结果
+
+![image-20210830223715583](img/image-20210830223715583.png)
+
+> 日志文件输出结果
+
+![image-20210830223854591](img/image-20210830223854591.png)
+
