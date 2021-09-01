@@ -9,7 +9,7 @@ CREATE TABLE `tb_user`
     description VARCHAR(255) DEFAULT NULL COMMENT '备注',
     create_time TIMESTAMP    DEFAULT NOW() COMMENT '创建时间',
     update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间',
-    visibility  TINYINT      DEFAULT 0 NOT NULL COMMENT '0 代表未删除，1 代表已删除'
+    is_deleted  TINYINT(1)   DEFAULT 0 NOT NULL COMMENT '0 代表未删除，1 代表已删除'
 )
     ENGINE InnoDB
     DEFAULT CHARSET = utf8mb4
@@ -19,12 +19,13 @@ CREATE TABLE `tb_user`
 DROP TABLE IF EXISTS `tb_role`;
 CREATE TABLE `tb_role`
 (
-    id          INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '角色 ID',
-    name        VARCHAR(255) NOT NULL COMMENT '角色名称',
-    name_en     VARCHAR(255) NOT NULL COMMENT '英文名称',
+    id          INTEGER                NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '角色 ID',
+    name        VARCHAR(255)           NOT NULL COMMENT '角色名称',
+    name_en     VARCHAR(255)           NOT NULL COMMENT '英文名称',
     description VARCHAR(255) DEFAULT NULL COMMENT '备注',
     create_time TIMESTAMP    DEFAULT NOW() COMMENT '创建时间',
-    update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间'
+    update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间',
+    is_deleted  TINYINT(1)   DEFAULT 0 NOT NULL COMMENT '0 代表未删除，1 代表已删除'
 )
     ENGINE InnoDB
     DEFAULT CHARSET = utf8mb4
@@ -39,7 +40,8 @@ CREATE TABLE `tb_permission`
     name_en     VARCHAR(255) NOT NULL COMMENT '英文名称',
     description VARCHAR(255) DEFAULT NULL COMMENT '备注',
     create_time TIMESTAMP    DEFAULT NOW() COMMENT '创建时间',
-    update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间'
+    update_time TIMESTAMP    DEFAULT NULL COMMENT '更新时间',
+    is_deleted  TINYINT(1)   DEFAULT 0 NOT NULL COMMENT '0 代表未删除，1 代表已删除'
 )
     ENGINE InnoDB
     DEFAULT CHARSET = utf8mb4
@@ -53,7 +55,8 @@ CREATE TABLE `tb_user_role`
     user_id     INTEGER NOT NULL COMMENT '用户 ID',
     role_id     INTEGER NOT NULL COMMENT '角色 ID',
     create_time TIMESTAMP DEFAULT NOW() COMMENT '创建时间',
-    update_time TIMESTAMP DEFAULT NULL COMMENT '更新时间'
+    update_time TIMESTAMP DEFAULT NULL COMMENT '更新时间',
+    is_deleted  TINYINT(1)   DEFAULT 0 NOT NULL COMMENT '0 代表未删除，1 代表已删除'
 )
     ENGINE InnoDB
     DEFAULT CHARSET = utf8mb4
@@ -67,7 +70,8 @@ CREATE TABLE `tb_role_permission`
     role_id       INTEGER NOT NULL COMMENT '角色 ID',
     permission_id INTEGER NOT NULL COMMENT '权限 ID',
     create_time   TIMESTAMP DEFAULT NOW() COMMENT '创建时间',
-    update_time   TIMESTAMP DEFAULT NULL COMMENT '更新时间'
+    update_time   TIMESTAMP DEFAULT NULL COMMENT '更新时间',
+    is_deleted  TINYINT(1)   DEFAULT 0 NOT NULL COMMENT '0 代表未删除，1 代表已删除'
 )
     ENGINE InnoDB
     DEFAULT CHARSET = utf8mb4

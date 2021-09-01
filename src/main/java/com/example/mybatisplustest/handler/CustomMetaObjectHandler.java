@@ -29,7 +29,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
             this.strictInsertFill(metaObject, "updateTime", Date.class, new Date());
             this.strictInsertFill(metaObject,"visibility",Integer.class,0);
         }catch (Exception e){
-            log.error("自动注入失败: ",e);
+            log.error("自动注入失败: {}",e);
         }
     }
 
@@ -44,7 +44,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
         try {
             this.strictUpdateFill(metaObject, "updateTime", Date.class, new Date());
         }catch (Exception e){
-            log.error("自动注入失败: ",e);
+            log.error("自动注入失败: {}",e);
         }
     }
 }
