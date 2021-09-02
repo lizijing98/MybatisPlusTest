@@ -76,7 +76,7 @@ public class TbUser extends Model<TbUser> {
      */
     @TableField(fill = FieldFill.INSERT)
     @TableLogic(value = "0",delval = "1")
-    private int visibility;
+    private Integer isDeleted;
 
 
     @Override

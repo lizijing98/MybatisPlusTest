@@ -12,7 +12,7 @@
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-        <result property="visibility" column="visibility" jdbcType="TINYINT"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
     </resultMap>
 
     <!--通过用户名查询-->
@@ -25,7 +25,7 @@
                description,
                create_time,
                update_time,
-               visibility
+               is_deleted
         from my_testdb.tb_user
         where username = #{username}
     </select>

@@ -18,3 +18,5 @@ logging:
   file:
     path: logs
   config: classpath:logback-spring.xml
+swagger:
+  enable: true

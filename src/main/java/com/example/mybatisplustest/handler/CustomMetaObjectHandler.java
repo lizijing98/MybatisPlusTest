@@ -27,7 +27,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
         try {
             this.strictInsertFill(metaObject, "createTime", Date.class, new Date());
             this.strictInsertFill(metaObject, "updateTime", Date.class, new Date());
-            this.strictInsertFill(metaObject,"visibility",Integer.class,0);
+            this.strictInsertFill(metaObject,"isDeleted",Integer.class,0);
         }catch (Exception e){
             log.error("自动注入失败: {}",e);
         }
