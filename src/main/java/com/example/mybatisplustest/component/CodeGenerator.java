@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CodeGenerator {
 
-    private static final String author = "LZJ";
+    private static final String author = "LiZijing";
     private static final String url = "jdbc:mysql://localhost:3306/my_testdb?autoReconnect=true&autoReconnectForPools=true&useUnicode=true&character_set_server=utf8mb4&serverTimezone=Asia/Shanghai";
     private static final String driverName = "com.mysql.cj.jdbc.Driver";
     private static final String username = "root";
@@ -78,7 +78,7 @@ public class CodeGenerator {
         globalConfig.setOutputDir(projectPath + "/" + projectModule + "/src/main/java");
         globalConfig.setFileOverride(true);
         globalConfig.setAuthor(author);
-        globalConfig.setSwagger2(false);
+        globalConfig.setSwagger2(true);
         globalConfig.setOpen(false);
         globalConfig.setEnableCache(false);
         globalConfig.setKotlin(false);
@@ -191,13 +191,14 @@ public class CodeGenerator {
     private static StrategyConfig strategyConfig(String tableName) {
         StrategyConfig strategyConfig = new StrategyConfig();
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
-        strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);
         strategyConfig.setRestControllerStyle(true);
-        /*strategyConfig.setSuperEntityColumns("id");*/
+        strategyConfig.setSuperEntityColumns("id");
         strategyConfig.setInclude(tableName);
         strategyConfig.setControllerMappingHyphenStyle(true);
+        strategyConfig.setLogicDeleteFieldName("is_deleted");
+        strategyConfig.setTablePrefix("tb_");
 
         // 自动填充设置
         TableFill gmtCreate = new TableFill("gmt_create", FieldFill.INSERT);

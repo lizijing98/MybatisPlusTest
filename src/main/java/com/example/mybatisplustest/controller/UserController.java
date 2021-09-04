@@ -1,7 +1,8 @@
 package com.example.mybatisplustest.controller;
 
 
-import com.example.mybatisplustest.service.TbUserService;
+import com.example.mybatisplustest.entity.User;
+import com.example.mybatisplustest.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -18,23 +19,23 @@ import javax.annotation.Resource;
  * 用户表 前端控制器
  * </p>
  *
- * @author LZJ
- * @since 2021-08-22
+ * @author LiZijing
+ * @since 2021-09-04
  */
 @RestController
 @RequestMapping("/user")
-@Api("User Control")
-public class TbUserController {
+@Api("User")
+public class UserController {
 
     @Resource
-    TbUserService userService;
+    UserService userService;
 
     @GetMapping("/{username}")
-    @ApiOperation(value = "get user by username", notes = "通过 username 获取 User")
+    @ApiOperation(value = "get user by username", notes = "通过 username 获取 User 实体")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", paramType = "path", value = "用户名", required = true, dataType = "String")
     })
-    public Object getUserByUsername(@PathVariable("username") String username) {
+    public User getUserByUsername(@PathVariable("username") String username){
         return userService.findUserByUsername(username);
     }
 }

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CodeGenerator_byOff {
-    private static String author = "LZJ";
+    private static String author = "LiZijing";
     private static String url = "jdbc:mysql://localhost:3306/my_testdb?autoReconnect=true&autoReconnectForPools=true&useUnicode=true&character_set_server=utf8mb4&serverTimezone=Asia/Shanghai";
     private static String driverName = "com.mysql.cj.jdbc.Driver";
     private static String username = "root";
