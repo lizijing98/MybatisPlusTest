@@ -1,7 +1,8 @@
 package com.example.mybatisplustest.service;
 
-import com.example.mybatisplustest.entity.User;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.mybatisplustest.entity.User;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * </p>
  *
  * @author LiZijing
+ * @see com.example.mybatisplustest.service.impl.UserImpl
  * @since 2021-09-04
  */
 public interface UserService extends IService<User> {
@@ -18,9 +20,9 @@ public interface UserService extends IService<User> {
     /**
      * <p> add one user </p>
      *
-     * @author LiZijing
      * @param user User
      * @return Integer
+     * @author LiZijing
      * @data 2021/9/4
      */
     Integer addOneUser(User user);
@@ -28,9 +30,9 @@ public interface UserService extends IService<User> {
     /**
      * <p> delete by userid </p>
      *
-     * @author LiZijing
      * @param userId Integer
      * @return Integer
+     * @author LiZijing
      * @data 2021/9/4
      */
     Integer deleteUserById(Integer userId);
@@ -38,9 +40,9 @@ public interface UserService extends IService<User> {
     /**
      * <p> delete by username </p>
      *
-     * @author LiZijing
      * @param username String
      * @return Integer
+     * @author LiZijing
      * @data 2021/9/4
      */
     Integer deleteUserByUsername(String username);
@@ -48,9 +50,9 @@ public interface UserService extends IService<User> {
     /**
      * <p> update one user </p>
      *
-     * @author LiZijing
      * @param updateUser User
      * @return Integer
+     * @author LiZijing
      * @data 2021/9/4
      */
     Integer updateOneUser(User updateUser);
@@ -58,9 +60,9 @@ public interface UserService extends IService<User> {
     /**
      * <p> find user by username </p>
      *
-     * @author LiZijing
      * @param username String
      * @return User
+     * @author LiZijing
      * @data 2021/9/4
      */
     User findUserByUsername(String username);
@@ -68,9 +70,19 @@ public interface UserService extends IService<User> {
     /**
      * <p> get all users </p>
      *
-     * @author LiZijing
      * @return List
+     * @author LiZijing
      * @data 2021/9/4
      */
     List<User> getAllUsers();
+
+    /**
+     * <p> select by wrapper </p>
+     *
+     * @param wrapper wrapper
+     * @return List
+     * @author LiZijing
+     * @data 2021/9/4
+     */
+    List<User> selectList(Wrapper<User> wrapper);
 }

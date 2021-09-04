@@ -3,7 +3,9 @@ package com.example.mybatisplustest.component;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
@@ -15,6 +17,7 @@ import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CodeGenerator {
 
@@ -26,11 +29,29 @@ public class CodeGenerator {
     private static final String parent = "com.example.mybatisplustest";
     private static final String projectModule = "";
     private static final String functionModule = "";
-    private static final String tableName = "tb_user";
     private static final String projectPath = System.getProperty("user.dir");
 
+    /**
+     * <p>
+     * 读取控制台内容
+     * </p>
+     */
+    public static String scanner(String tip) {
+        Scanner scanner = new Scanner(System.in);
+        StringBuilder help = new StringBuilder();
+        help.append("请输入" + tip + "：");
+        System.out.println(help.toString());
+        if (scanner.hasNext()) {
+            String ipt = scanner.next();
+            if (StringUtils.isNotBlank(ipt)) {
+                return ipt;
+            }
+        }
+        throw new MybatisPlusException("请输入正确的" + tip + "！");
+    }
+
     public static void main(String[] args) {
-        generator(author, url, driverName, username, password, parent, projectModule, functionModule, tableName);
+        generator(author, url, driverName, username, password, parent, projectModule, functionModule);
     }
 
     /**
@@ -44,7 +65,6 @@ public class CodeGenerator {
      * @param parent         父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名
      * @param projectModule  项目模块包名
      * @param functionModule 功能模块包名
-     * @param tableName      表名，多个英文逗号分割
      */
     public static void generator(String author,
                                  String url,
@@ -53,14 +73,13 @@ public class CodeGenerator {
                                  String password,
                                  String parent,
                                  String projectModule,
-                                 String functionModule,
-                                 String tableName) {
+                                 String functionModule) {
         AutoGenerator mpg = new AutoGenerator();
         mpg.setGlobalConfig(globalConfig(author, projectModule));
         mpg.setDataSource(dataSourceConfig(url, driverName, username, password));
         mpg.setPackageInfo(packageConfig(parent, functionModule));
         mpg.setTemplate(templateConfig());
-        mpg.setStrategy(strategyConfig(tableName));
+        mpg.setStrategy(strategyConfig());
         mpg.setCfg(injectionConfig());
         mpg.setTemplateEngine(new VelocityTemplateEngine());
         mpg.execute();
@@ -185,27 +204,27 @@ public class CodeGenerator {
     /**
      * 策略配置
      *
-     * @param tableName 数据库表名称，多个用英文逗号隔开
      * @return StrategyConfig
      */
-    private static StrategyConfig strategyConfig(String tableName) {
+    private static StrategyConfig strategyConfig() {
         StrategyConfig strategyConfig = new StrategyConfig();
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);
         strategyConfig.setRestControllerStyle(true);
-        strategyConfig.setSuperEntityColumns("id");
-        strategyConfig.setInclude(tableName);
+        strategyConfig.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategyConfig.setControllerMappingHyphenStyle(true);
         strategyConfig.setLogicDeleteFieldName("is_deleted");
-        strategyConfig.setTablePrefix("tb_");
+        strategyConfig.setTablePrefix(scanner("公共表头")+"_");
 
         // 自动填充设置
-        TableFill gmtCreate = new TableFill("gmt_create", FieldFill.INSERT);
-        TableFill gmtModified = new TableFill("gmt_modified", FieldFill.INSERT_UPDATE);
+        TableFill createTime = new TableFill("create_time", FieldFill.INSERT);
+        TableFill updateTime = new TableFill("update_time", FieldFill.INSERT_UPDATE);
+        TableFill isDeleted = new TableFill("is_deleted", FieldFill.INSERT);
         ArrayList<TableFill> tableFills = new ArrayList<>();
-        tableFills.add(gmtCreate);
-        tableFills.add(gmtModified);
+        tableFills.add(createTime);
+        tableFills.add(updateTime);
+        tableFills.add(isDeleted);
         strategyConfig.setTableFillList(tableFills);
 
         // 乐观锁

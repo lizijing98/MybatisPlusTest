@@ -4,18 +4,15 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <p>
- * 用户表
+ * 角色表
  * </p>
  *
  * @author LiZijing
@@ -23,29 +20,21 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("tb_user")
-@AllArgsConstructor
-@NoArgsConstructor
-@ApiModel(value = "User对象", description = "用户表")
-public class User extends Model<User> {
+@TableName("tb_role")
+@ApiModel(value = "Role对象", description = "角色表")
+public class Role extends Model<Role> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户 ID")
-    @TableId(value = "id",type = IdType.AUTO)
+    @ApiModelProperty(value = "角色 ID")
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "用户名")
-    private String username;
+    @ApiModelProperty(value = "角色名称")
+    private String name;
 
-    @ApiModelProperty(value = "密码")
-    private String password;
-
-    @ApiModelProperty(value = "手机号码")
-    private String phone;
-
-    @ApiModelProperty(value = "邮箱")
-    private String email;
+    @ApiModelProperty(value = "英文名称")
+    private String nameEn;
 
     @ApiModelProperty(value = "备注")
     private String description;
@@ -63,8 +52,6 @@ public class User extends Model<User> {
     @TableLogic
     private Boolean isDeleted;
 
-    @TableField(exist = false)
-    private List<Role> roles;
 
     @Override
     protected Serializable pkVal() {

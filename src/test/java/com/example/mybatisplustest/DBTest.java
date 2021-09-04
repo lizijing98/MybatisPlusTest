@@ -16,7 +16,7 @@ public class DBTest {
     @Resource
     private UserMapper userMapper;
     @Resource
-    private UserService UserService;
+    private UserService userService;
 
     @Test
     void testInsert() {
@@ -51,14 +51,14 @@ public class DBTest {
         User user = new User();
         user.setUsername("addtest");
         user.setPassword("addtest");
-        int result = UserService.addOneUser(user);
+        int result = userService.addOneUser(user);
         log.info("the new user: {}", user);
         log.info("result: {}", result);
     }
 
     @Test
     void deleteOneUser() {
-        int result = UserService.deleteUserByUsername("addtest");
+        int result = userService.deleteUserByUsername("addtest");
         if (result > 0) {
             log.info("delete success: {}", result);
         } else {
@@ -68,11 +68,18 @@ public class DBTest {
 
     @Test
     void searchOneUser() {
-        User user = UserService.findUserByUsername("addtest");
+        User user = userService.findUserByUsername("addtest");
         if (user == null) {
             log.error("search failed: {}", user);
         } else {
             log.info("search success: {}", user);
         }
     }
+
+    @Test
+    void selectList() {
+        List<User> users = userService.selectList(null);
+        users.forEach(item->log.info(item.toString()));
+    }
+
 }
