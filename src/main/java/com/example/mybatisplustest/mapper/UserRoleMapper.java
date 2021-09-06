@@ -1,7 +1,9 @@
 package com.example.mybatisplustest.mapper;
 
-import com.example.mybatisplustest.entity.UserRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.mybatisplustest.entity.UserRole;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
 
+    List<UserRole> selectByUserId(Integer userId);
 }

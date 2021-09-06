@@ -1,6 +1,8 @@
 package com.example.mybatisplustest.service;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.mybatisplustest.entity.User;
 
@@ -84,5 +86,5 @@ public interface UserService extends IService<User> {
      * @author LiZijing
      * @data 2021/9/4
      */
-    List<User> selectList(Wrapper<User> wrapper);
+    List<User> selectList(LambdaQueryWrapper<User> wrapper);
 }

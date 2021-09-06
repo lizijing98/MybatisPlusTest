@@ -1,7 +1,6 @@
 package com.example.mybatisplustest.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.mybatisplustest.entity.Role;
 import com.example.mybatisplustest.entity.User;
@@ -37,7 +36,7 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
     private UserRoleMapper userRoleMapper;
 
 
-    public List<User> selectList(Wrapper<User> wrapper) {
+    public List<User> selectList(LambdaQueryWrapper<User> wrapper) {
         List<User> users = userMapper.selectList(wrapper);
         for (User user : users) {
             HashMap<String, Object> map = new HashMap<>();
@@ -76,9 +75,15 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
 
     @Override
     public User findUserByUsername(String username) {
-        return new LambdaQueryChainWrapper<>(userMapper)
-                .eq(User::getUsername, username)
-                .one();
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>();
+        wrapper.eq(User::getUsername, username);
+        User user = userMapper.selectOne(wrapper);
+        List<UserRole> userRoleList = userRoleMapper.selectByUserId(user.getId());
+        HashMap<String, Object> roleIds = new HashMap<>();
+        userRoleList.forEach(item -> roleIds.put("id", item.getRoleId()));
+        List<Role> roleList = roleMapper.selectByMap(roleIds);
+        user.setRoles(roleList);
+        return user;
     }
 
     @Override
