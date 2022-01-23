@@ -63,5 +63,14 @@
             <appender-ref ref="FILE"/>
         </logger>
     </springProfile>
+    <springProfile name="test">
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+        <logger name="com.example.mybatisplustest" level="info" additivity="true">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+    </springProfile>
+
     <!-- 日志输出级别 -->
 </configuration>

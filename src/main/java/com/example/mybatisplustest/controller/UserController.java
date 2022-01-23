@@ -53,13 +53,26 @@ public class UserController {
         return userService.selectList(wrapper);
     }
 
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/{username}", method = RequestMethod.GET)
     @ApiOperation(value = "get user by username", notes = "通过 username 获取 User 实体")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", paramType = "path", value = "用户名", required = true, dataType = "String")
     })
     public User getUserByUsername(@PathVariable("username") String username) {
-        return userService.findUserByUsername(username);
+        return userService.findUserByUsername(username);// 这个会产生 NullPointException
     }
+
+    @RequestMapping(value = "/v2/{username}", method = RequestMethod.GET)
+    @ApiOperation(value = "get user by username", notes = "通过 username 获取 User 实体")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "username", paramType = "path", value = "用户名", required = true, dataType = "String")
+    })
+    public User getUserByName(@PathVariable("username")String username){
+        return userService.lambdaQuery()
+                .eq(User::getUsername,username)
+                .one();
+    }
+
+
 }
 
